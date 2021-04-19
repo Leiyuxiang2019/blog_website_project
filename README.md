@@ -5,7 +5,6 @@
 
 第一步：克隆代码
 
-    git clone https://github.com/zhujp/flask_blog.git app_name
     
 第二步：创建数据库
     
