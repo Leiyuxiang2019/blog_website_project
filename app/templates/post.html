@@ -1,0 +1,20 @@
+{% extends 'app.html' %}
+{% block title %}{{ post.title }}-{% endblock %}
+{% block content %}
+<div class="row"> 
+
+            <!-- Content -->
+            <div id="content" class="12u skel-cell-important">
+                <section>
+                    <header>
+                        <h2>{{ post.title }}</h2>
+                        <p class="posted">Posted:&nbsp;{{ post.created_at.strftime('%Y-%m-%d') }}&nbsp;&nbsp;By<span>&nbsp;&nbsp;{{ post.author }}</span>&nbsp;&nbsp;|&nbsp;&nbsp;Views({{ post.views }})</p>
+                                                <p></p>
+                    </header>
+                    {{ post.body|markdown }}
+                </section>
+
+            </div>
+            
+        </div>
+{% endblock %}

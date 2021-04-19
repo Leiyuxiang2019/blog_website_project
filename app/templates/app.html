@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html class=" desktop">
+    <head>
+        {% block head %}
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>{% block title %}{% endblock %}{{ site.site_name }}</title>
+        <meta name="description" content="{{ site.introduction }}">
+        <meta name="keywords" content="{% block keywords %}{% endblock %}">
+        <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}" media="screen">
+        
+        <noscript>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/skel-noscript.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style-desktop.css') }}" />
+        </noscript>
+        <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/skel.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/skel-panels.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/init.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/moment-with-locales.min.js') }}"></script>
+        {{ moment.lang("zh-CN") }}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/adminapp.css') }}" />
+    {% endblock %}
+    </head>
+    <body>
+        <div id="skel-panels-pageWrapper" style="position: relative; left: 0px; right: 0px; top: 0px; backface-visibility: hidden; transition: -webkit-transform 0.25s ease-in-out;">
+            {% block header %}
+            <div id="header">
+                <div class="container"> 
+
+                    <!-- Logo -->
+                    <div id="logo">
+                        <h1><a href="/"><img src="{{ site.logo }}" alt="{{ site.site_name }}"></a></h1>
+                        <span class="text-transform:none;">{{ site.title_intro }}</span>
+                    </div>
+
+                    <!-- Nav -->
+                    <nav id="nav">
+                        <ul>
+                            <li class=""><a href="/" title="Home">Home</a></li>
+                            {% for v in nav %}
+                            <li class=""><a href="{{ url_for('.category',id=v.id)}}" title="{{ v.name }}">{{ v.name }} 
+                                </a></li>
+                            {% endfor %}
+                            
+                            
+                            <li>
+                                <form action="{{ url_for('.search')}}" method="post">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                    <input type="text" name="keyword" placeholder="请输入关键字">
+                                    <input type="submit" id="keysearch" value="搜索">
+                                </form>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            {% endblock %}
+
+<!-- Main -->
+<div id="main">
+    <div class="container">
+        {% block content %}{% endblock %}
+        
+    </div>
+</div>
+<!-- main end-->
+        <!-- Copyright -->
+        
+        <div id="copyright">
+            {% if links %}
+            <div class="container">
+                友情链接：{% for link in links %}<a href="{{ link.url }}" target="_blank">{{ link.name }}</a>{% endfor %}
+            </div>
+            {% endif %}
+            <div class="container">
+                {{ site.footer }}
+            </div>
+        </div>
+        
+
+    </div>
+    
+    </body>
+</html>
